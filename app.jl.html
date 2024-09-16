@@ -1,0 +1,14 @@
+<header>
+    <h1>Robot arm control</h1>
+</header>
+<div class="row">
+    <div class="st-col col-12 col-sm st-module">
+        <plotly id="i5h78" data="W3siZ2J0eXBlIjoiTGluZSBDaGFydCIsIngiOiIkX3t0aW1lc30iLCJ5IjoiJF97YXJtX3JlZmVyZW5jZX0iLCJ0eXBlIjoic2NhdHRlciIsIm1vZGUiOiJsaW5lcyIsIm5hbWUiOiJSZWZlcmVuY2UifSx7IngiOiIkX3t0aW1lc30iLCJ5IjoiJF97YW5nbGV9IiwidHlwZSI6InNjYXR0ZXIiLCJuYW1lIjoiQW5nbGUifSx7IngiOiIkX3t0aW1lc30iLCJ5IjoiJF97ZXJyb3J9IiwidHlwZSI6InNjYXR0ZXIiLCJuYW1lIjoiRXJyb3IiLCJsaW5lIjp7ImRhc2giOiJkYXNoIn19XQ==" config="e30=" layout="eyJ0aXRsZSI6Ik15IENoYXJ0In0="></plotly>
+    </div>
+    <div class="st-col st-module col-3">
+        <q-toggle id="iqe9a" color="blue" label="Generator" v-model="reference_on"></q-toggle>
+        <q-toggle id="ib5wz" color="blue" label="Dashboard enabled" v-model="dashboard_enabled"></q-toggle>
+        <q-slider id="i53dv" color="primary" :label="true" :max="10" :min="1" :step="1" v-model="A"></q-slider>
+        <q-btn id="iq9dg" color="primary" label="Reset" v-on:click="reset = true"></q-btn>
+    </div>
+</div>
