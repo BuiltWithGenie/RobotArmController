@@ -2,70 +2,89 @@ using GenieFramework
 using .RobotArmControl
 @genietools
 
-_signal_params = Dict(:A => 1.0, :f => 0.5, :dt => 0.1)
-_reference_on = Ref(false)
-_reference = Ref(0.0)
-_t = Ref(0.0)
-@async gen_signal(_signal_params, _reference_on, _reference, _t)
+# Create channels for communication
+arm_channel = Channel{Dict{Symbol,Any}}(100)
+output_channel = Channel{Dict{Symbol,Float64}}(1)
 
-
-# arm parameter inputs
-_arm_params = Dict(:polling_rate => 0.1)
-# arm outputs
-_angle = Ref([0.0])
-_arm_reference = Ref([0.0])
-_error = Ref([0.0])
-_times = Ref([0.0])
-@async run_arm(_arm_params, _reference, _t, _reference_on, _angle, _arm_reference, _error, _times)
-
+# Start the signal generator and arm simulation tasks
+@async begin
+  try 
+    run_arm(arm_channel, output_channel)
+  catch e
+    @error "$e"
+  end
+end
 
 @app begin
-  # # Reference
-  @in reference_on = false
-  @in A = 1
+  # Arm inputs
+  @in angle = 0.0
+  @in arm_on = true
+  @in Kp = 1.0
+  @in Ki = 0.1
+  @in Kd = 0.1
   # # Dashboard
-  @in refresh_rate = 0.1
+  @in refresh_rate = 0.2
   @in dashboard_enabled = false
   @in reset = false
-  # # Arm outputs
+  @in max_data_points = 1000
+
+  # Arm outputs
   @out times = Float64[]
-  @out arm_reference = Float64[]
-  @out angle = Float64[]
-  @out error = Float64[]
-
-  @onchange reference_on begin
-    _reference_on[] = reference_on
-  end
-
-  @onchange A begin
-    _signal_params[:A] = A
-  end
-
-  @onchange isready begin
-    @show dashboard_enabled
-    @async begin
-      while true
-        if dashboard_enabled 
-          times = _times[]
-          angle = _angle[]
-          arm_reference = _arm_reference[]
-          error = _error[]
-          sleep(refresh_rate)
-        else 
-          sleep(0.5)
-        end
-      end
-    end
-  end
-
-  @onbutton reset begin
-    _times[] = Float64[]
-    _angle[] = Float64[]
-    _error[] = Float64[]
-    _arm_reference[] = Float64[]
-    _t[] = 0
-  end
-
+  @out angles = Float64[]
+  @out references = Float64[]
+  @out errors = Float64[]
+  @out velocity = Float64[]
 end
+
+@onchange angle begin
+  put!(arm_channel, Dict(:command => :set_target, :value => angle))
+end
+
+@onchange Kp, Ki, Kd begin
+  put!(arm_channel, Dict(:command => :set_pid, :value => (Kp, Ki, Kd)))
+end
+
+
+# @onchange isready begin
+# dashboard_enabled = true
+# end
+
+@onchange dashboard_enabled begin
+  @async begin
+    while __model__.dashboard_enabled[] == true
+        if isready(output_channel)
+          output = take!(output_channel)
+          times = vcat(times, output[:time])
+          angles = vcat(angles, output[:angle])
+          references = vcat(references, output[:reference])
+          errors = vcat(errors, output[:error])
+          velocity = vcat(velocity, output[:velocity])
+          # Limit the stored data points if needed
+          if length(times) > max_data_points
+            popfirst!(times)
+            popfirst!(angles)
+            popfirst!(references)
+            popfirst!(errors)
+            popfirst!(velocity)
+          end
+        end
+        sleep(refresh_rate)
+      end
+  end
+end
+
+@onbutton reset begin
+  @info "Resetting arm and dashboard"
+  dashboard_enabled = false
+  put!(arm_channel, Dict(:command => :reset))
+  sleep(refresh_rate*3)
+  times = Float64[]
+  angles = Float64[]
+  references = Float64[]
+  errors = Float64[]
+  velocity = Float64[]
+  dashboard_enabled = true
+end
+
 
 @page("/", "app.jl.html")
