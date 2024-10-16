@@ -1,18 +1,25 @@
 <header>
-    <h1>Robot arm control</h1>
+    <h1 id="ikoi">Robot arm control</h1>
 </header>
 <div class="row">
     <div class="st-col col-12 col-sm st-module">
-        <plotly id="i2dey" data="W3siZ2J0eXBlIjoiTGluZSBDaGFydCIsIngiOiIkX3t0aW1lc30iLCJ5IjoiJF97YW5nbGVzfSIsInR5cGUiOiJzY2F0dGVyIiwibW9kZSI6ImxpbmVzIiwibmFtZSI6IlRyYWNlIn1d" config="e30=" layout="eyJ0aXRsZSI6Ik15IENoYXJ0In0="></plotly>
+        <plotly id="i2dey" data="W3siZ2J0eXBlIjoiTGluZSBDaGFydCIsIngiOiIkX3t0aW1lc30iLCJ5IjoiJF97YW5nbGVzfSIsInR5cGUiOiJzY2F0dGVyIiwibW9kZSI6ImxpbmVzIiwibmFtZSI6IkFuZ2xlIn1d" config="e30=" layout="eyJ0aXRsZSI6IkFybSBhbmdsZSIsIm1hcmdpbiI6eyJsIjoiMjAiLCJyIjowfX0="></plotly>
+        <plotly id="i9lcl" data="W3siZ2J0eXBlIjoiTGluZSBDaGFydCIsIngiOiIkX3t0aW1lc30iLCJ5IjoiJF97dmVsb2NpdHl9IiwidHlwZSI6InNjYXR0ZXIiLCJtb2RlIjoibGluZXMiLCJuYW1lIjoiVmVsb2NpdHkifV0=" config="e30=" layout="eyJ0aXRsZSI6IlZlbG9jaXR5IiwiaGVpZ2h0IjoiMTAwIiwibWFyZ2luIjp7ImIiOjAsInQiOiIyNSIsImwiOiIyMCIsInIiOjB9LCJsZWdlbmQiOnsieSI6IiJ9fQ=="></plotly>
     </div>
-    <div class="st-col st-module col-2">
-        <q-toggle id="ib5wz" color="blue" label="Dashboard enabled" v-model="dashboard_enabled"></q-toggle><br>
+    <div id="iu9y4" class="st-col st-module col-2">
+        <q-toggle id="ib5wz" color="blue" label="Dashboard ON" v-model="dashboard_enabled" icon="offline_bolt" size="60px"></q-toggle><br>
+        <h6 id="iw6tm">Angle</h6>
         <div>
-            <q-knob id="ihvae" v-model="angle" color="primary" track-color="grey" :max="6.6" :min="0" :step="1" :show-value="true"></q-knob>
+            <q-knob id="ihvae" v-model="angle" color="primary" track-color="secondary" :max="6.6" :min="0" :step="1" :show-value="true" name="Angle" size="80px"></q-knob>
         </div>
-        <q-input id="ijixl" label="Ki " v-model="Ki" type="number"></q-input>
-        <q-input id="i3mqg" label="Kp " v-model="Kp" type="number"></q-input>
-        <q-input id="i6c9q" label="Kd " v-model="Kd" type="number"></q-input>
-        <q-btn id="iq9dg" color="primary" label="Reset" v-on:click="reset = true"></q-btn>
+        <h6 id="ivj3e">PID controller<br></h6>
+        <p></p>
+        <q-badge id="i7w7v" color="primary" label="Ki "></q-badge>
+        <q-slider id="i7ww4" v-model="Ki" color="primary" :label="true" :max="1" :min="0" :step="0.1" :label-always="false"></q-slider>
+        <q-badge id="isl0e" color="primary" label="Kp "></q-badge>
+        <q-slider id="i08t1" v-model="Kp" color="primary" :label="true" :max="1" :min="0" :step="0.1" :label-always="false"></q-slider>
+        <q-badge id="ibqzv" color="primary" label="Kd "></q-badge>
+        <q-slider id="idwjg" v-model="Kd" color="primary" :label="true" :max="1" :min="0" :step="0.1" :label-always="false"></q-slider>
+        <q-btn id="iq9dg" color="primary" label="Reset" v-on:click="reset = true" icon="restore"></q-btn>
     </div>
 </div><br>

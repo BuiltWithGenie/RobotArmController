@@ -34,7 +34,7 @@ end
 function update_plant(arm::RobotArm, torque, dt)
   angular_acceleration = (torque - arm.damping * arm.angular_velocity) / arm.inertia
   arm.angular_velocity += angular_acceleration * dt
-  arm.angle = ( arm.angle + arm.angular_velocity * dt) % (2π)
+  arm.angle = arm.angle + arm.angular_velocity * dt
 end
 
 
@@ -51,7 +51,7 @@ function run_arm(arm_channel, output_channel)
   
   target_angle = 0.0
   t = 0.0
-  dt = 0.2
+  dt = 0.01
 
   println("Running arm simulation")
   while true
