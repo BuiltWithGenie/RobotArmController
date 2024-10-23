@@ -1,7 +1,7 @@
 using GenieFramework
 using .RobotArmControl
 @genietools
-
+Genie.config.webchannels_keepalive_frequency = 0
 # Create channels for communication
 arm_channel = Channel{Dict{Symbol,Any}}(1)
 output_channel = Channel{Dict{Symbol,Float64}}(1)
@@ -23,7 +23,7 @@ end
   @in Ki = 0.1
   @in Kd = 0.1
   # # Dashboard
-  @in refresh_rate = 0.2
+  @in refresh_rate = 0.1
   @in dashboard_enabled = false
   @in reset = false
   @in max_data_points = 100
