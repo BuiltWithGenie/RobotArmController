@@ -2,7 +2,7 @@
 
 This is an app for controlling a robot arm with a dashboard, specifically its angle and the parameters of its PID controller.
 
-![](preview.png)
+![](preview.gif)
 
 The robot runs in a separate process and it receives and send messages via a channel. The dashboard communicates with the robot via the channel, pushing new parameter updates and periodically retrieving the state of the robot. 
 
