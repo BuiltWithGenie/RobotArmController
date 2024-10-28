@@ -1,13 +1,13 @@
-<header>
-    <h1 id="ikoi">Robot arm control</h1>
+<header id="i0qi">
+    <h1 id="ikoi">Robot arm controller</h1>
 </header>
 <div class="row">
     <div class="st-col col-12 col-sm st-module">
-        <plotly id="i2dey" data="W3siZ2J0eXBlIjoiTGluZSBDaGFydCIsIngiOiIkX3t0aW1lc30iLCJ5IjoiJF97YW5nbGVzfSIsInR5cGUiOiJzY2F0dGVyIiwibW9kZSI6ImxpbmVzIiwibmFtZSI6IkFuZ2xlIn1d" config="e30=" layout="eyJ0aXRsZSI6IkFybSBhbmdsZSIsIm1hcmdpbiI6eyJsIjoiMjAiLCJyIjowfX0="></plotly>
-        <plotly id="i9lcl" data="W3siZ2J0eXBlIjoiTGluZSBDaGFydCIsIngiOiIkX3t0aW1lc30iLCJ5IjoiJF97dmVsb2NpdHl9IiwidHlwZSI6InNjYXR0ZXIiLCJtb2RlIjoibGluZXMiLCJuYW1lIjoiVmVsb2NpdHkifV0=" config="e30=" layout="eyJ0aXRsZSI6IlZlbG9jaXR5IiwiaGVpZ2h0IjoiMTAwIiwibWFyZ2luIjp7ImIiOjAsInQiOiIyNSIsImwiOiIyMCIsInIiOjB9LCJsZWdlbmQiOnsieSI6IiJ9fQ=="></plotly>
+        <plotly id="i2dey" data="W3siZ2J0eXBlIjoiTGluZSBDaGFydCIsIngiOiIkX3t0aW1lc30iLCJ5IjoiJF97YW5nbGVzfSIsInR5cGUiOiJzY2F0dGVyIiwibW9kZSI6ImxpbmVzIiwibmFtZSI6IkFuZ2xlIn1d" config="e30=" layout="eyJ0aXRsZSI6IkFybSBhbmdsZSIsIm1hcmdpbiI6eyJsIjoiNTUiLCJyIjowfSwieWF4aXMiOnsidGl0bGUiOnsidGV4dCI6InJhZCJ9fX0="></plotly>
+        <plotly id="i9lcl" data="W3siZ2J0eXBlIjoiTGluZSBDaGFydCIsIngiOiIkX3t0aW1lc30iLCJ5IjoiJF97dmVsb2NpdHl9IiwidHlwZSI6InNjYXR0ZXIiLCJtb2RlIjoibGluZXMiLCJuYW1lIjoiVmVsb2NpdHkifV0=" config="e30=" layout="eyJ0aXRsZSI6IlZlbG9jaXR5IiwiaGVpZ2h0IjoiMTAwIiwibWFyZ2luIjp7ImIiOjAsInQiOiIyNSIsImwiOiI1NSIsInIiOjB9LCJsZWdlbmQiOnsieSI6IiJ9LCJ5YXhpcyI6eyJ0aXRsZSI6eyJ0ZXh0IjoicmFkL3MifX19"></plotly>
     </div>
     <div id="iu9y4" class="st-col st-module col-2">
-        <q-toggle id="ib5wz" color="blue" label="Dashboard ON" v-model="dashboard_enabled" icon="offline_bolt" size="60px"></q-toggle><br>
+        <q-toggle id="ib5wz" color="primary" label="Dashboard ON" v-model="dashboard_enabled" icon="offline_bolt" size="60px"></q-toggle><br>
         <h6 id="iw6tm">Angle</h6>
         <div>
             <q-knob id="ihvae" v-model="angle" color="primary" track-color="secondary" :max="6.6" :min="0" :step="1" :show-value="true" name="Angle" size="80px"></q-knob>
