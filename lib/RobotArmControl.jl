@@ -51,7 +51,7 @@ function run_arm(arm_channel, output_channel)
   
   target_angle = 0.0
   t = 0.0
-  dt = 0.01
+  dt = 0.03
 
   println("Running arm simulation")
   while true

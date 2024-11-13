@@ -1,12 +1,6 @@
-#iq9dg {
-  margin-top:32px;
-  margin-right:auto;
-  margin-bottom:0px;
-  margin-left:auto;
-}
-
 #iu9y4 {
   text-align:center;
+  max-width:214px;
 }
 
 #ivj3e {
@@ -27,20 +21,22 @@
   margin-top:0px;
   margin-right:0px;
   margin-bottom:0px;
-  margin-left:30px;
-  margin:0;
+  margin-left:0px;
   font-size:2.5em;
   font-weight:500;
   color:white;
 }
 
 #i0qi {
-  background-color:#1b1f3b;
-  padding:20px;
+  background-color:rgb(27, 31, 59);
+  padding-top:20px;
+  padding-right:20px;
+  padding-bottom:20px;
+  padding-left:20px;
   opacity:0.8;
   text-align:center;
   color:white;
   margin-bottom:20px;
-  box-shadow:0 2px 4px rgba(0,0,0,0.1);
+  box-shadow:rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
 
