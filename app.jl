@@ -26,7 +26,8 @@ end
   @in Kd = 0.1
 
   # Dashboard
-  @in dashboard_enabled = false
+  @in dashboard_on = false
+  @out controls_off = true
   @in max_data_points = 200
   @out t_init = 0.0
   @private refresh_rate = 0.2
@@ -35,8 +36,6 @@ end
   # # Arm outputs
   @out times = Float64[]
   @out angles = Float64[]
-  @out references = Float64[]
-  @out errors = Float64[]
   @out velocity = Float64[]
 
   @onchange isready begin
@@ -44,29 +43,31 @@ end
   
   # Push a new angle value to the arm
   @onchange angle begin
-    @show global_lock
-    dashboard_enabled && put!(arm_input_channel, Dict(:command => :set_target, :value => angle))
+    put!(arm_input_channel, Dict(:command => :set_target, :value => angle))
   end
 
   # Push the PID controller values to the arm
   @onchange Kp, Ki, Kd begin
-    dashboard_enabled && put!(arm_input_channel, Dict(:command => :set_pid, :value => (Kp, Ki, Kd)))
+    put!(arm_input_channel, Dict(:command => :set_pid, :value => (Kp, Ki, Kd)))
   end
 
   # Start updating the dashboard with the arm output
-  @onchange dashboard_enabled begin
-    if dashboard_enabled
+  @onchange dashboard_on begin
+    if dashboard_on
       (times, angles, references, errors, velocity) = [Float64[] for _ in 1:5]
       output = take!(arm_output_channel)
       t_init = output[:time]
+      controls_off = false
       run_task = true
+    else
+      controls_off = true
     end
   end
 
   # Continuously update the dashboard with the arm output
   @onchange run_task begin
     @async begin
-      while dashboard_enabled 
+      while dashboard_on 
         output = take!(arm_output_channel)
         # Limit the stored data points if needed
         if length(times) > max_data_points-1
@@ -74,8 +75,6 @@ end
         end
         times = vcat(times, output[:time]-t_init)
         angles = vcat(angles, output[:angle])
-        references = vcat(references, output[:reference])
-        errors = vcat(errors, output[:error])
         velocity = vcat(velocity, output[:velocity])
         # Each client is connected via a channel with id stored in __model__.channel__
         # The Genie.WebChannels.SUBSCRIPTIONS dictionary contains details about the clients connected to the app on a channel.

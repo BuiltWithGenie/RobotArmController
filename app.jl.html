@@ -7,18 +7,18 @@
         <plotly id="i9lcl" data="W3siZ2J0eXBlIjoiTGluZSBDaGFydCIsIngiOiIkX3t0aW1lc30iLCJ5IjoiJF97dmVsb2NpdHl9IiwidHlwZSI6InNjYXR0ZXIiLCJtb2RlIjoibGluZXMiLCJuYW1lIjoiVmVsb2NpdHkifV0=" config="e30=" layout="eyJ0aXRsZSI6IlZlbG9jaXR5IiwiaGVpZ2h0IjoiMTAwIiwibWFyZ2luIjp7ImIiOjAsInQiOiIyNSIsImwiOiI1NSIsInIiOjB9LCJsZWdlbmQiOnsieSI6IiJ9LCJ5YXhpcyI6eyJ0aXRsZSI6eyJ0ZXh0IjoicmFkL3MifX19"></plotly>
     </div>
     <div id="iu9y4" class="st-col st-module col-2 st-gap-sm">
-        <q-toggle id="ib5wz" color="primary" label="Dashboard ON" v-model="dashboard_enabled" icon="offline_bolt" size="60px"></q-toggle><br>
+        <q-toggle id="ib5wz" color="primary" label="Dashboard ON" icon="offline_bolt" size="60px" v-model="dashboard_on"></q-toggle><br>
         <h6 id="iw6tm">Angle</h6>
         <div>
-            <q-knob id="ihvae" v-model="angle" color="primary" track-color="secondary" :max="6.6" :min="0" :step="1" :show-value="true" name="Angle" size="80px"></q-knob>
+            <q-knob id="ihvae" v-model="angle" color="primary" track-color="secondary" :max="6.6" :min="0" :step="1" :show-value="true" name="Angle" size="80px" :disable="controls_off"></q-knob>
         </div>
         <h6 id="ivj3e">PID controller<br></h6>
         <p></p>
         <p class="st-field-label">Ki</p>
-        <q-slider id="i7ww4" v-model="Ki" color="primary" :label="true" :max="1" :min="0" :step="0.1" :label-always="false"></q-slider>
+        <q-slider id="i7ww4" v-model="Ki" color="primary" :label="true" :max="1" :min="0" :step="0.1" :label-always="false" :disable="controls_off"></q-slider>
         <p class="st-field-label">Kp</p>
-        <q-slider id="i08t1" v-model="Kp" color="primary" :label="true" :max="1" :min="0" :step="0.1" :label-always="false"></q-slider>
+        <q-slider id="i08t1" v-model="Kp" color="primary" :label="true" :max="1" :min="0" :step="0.1" :label-always="false" :disable="controls_off"></q-slider>
         <p class="st-field-label">Kd</p>
-        <q-slider id="idwjg" v-model="Kd" color="primary" :label="true" :max="1" :min="0" :step="0.1" :label-always="false"></q-slider>
+        <q-slider id="idwjg" v-model="Kd" color="primary" :label="true" :max="1" :min="0" :step="0.1" :label-always="false" :disable="controls_off"></q-slider>
     </div>
 </div><br>
