@@ -14,6 +14,8 @@ This app showcases:
 - Using asynchronous tasks for running long processes.
 - High-frequency plot updates in real time.
 
+Watch the tutorial [here](https://youtu.be/dsBRj5bstUs?t=1701).
+
 ## Installation
 
 Clone the repository and install the dependencies:
